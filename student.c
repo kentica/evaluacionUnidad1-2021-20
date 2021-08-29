@@ -15,6 +15,7 @@ void feature1(FILE *fin, FILE *fout){
     }
     while (cont<=0);
     printf("\n");   
+<<<<<<< HEAD
 }
 
 void feature2(FILE *fin, FILE *fout) {
@@ -30,3 +31,6 @@ void feature2(FILE *fin, FILE *fout) {
     }
     printf("\n");
 }
+=======
+}
+>>>>>>> main

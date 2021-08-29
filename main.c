@@ -14,8 +14,9 @@ int main(int argc, char *argv[]){
         perror("Open File fout fails: ");
         return(EXIT_FAILURE);
     }
-    for(int i=0;i<6;i++){
+    for(int i=0;i<8;i++){
         if(i ==1 ) feature1(inFile,inFileOut);
+        if(i ==2 ) feature2(inFile,inFileOut);
     }
     
     fclose(inFile);

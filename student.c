@@ -3,9 +3,9 @@
 #include <string.h>
 
 void feature1(FILE *fin, FILE *fout){
-    char buffer[64];
+    char buffer[128];
     char *status = NULL;
-    int cont= 0; //Para controlar el ciclo que se haga solo para leer la primera linea de el archivo
+    int cont= 0; 
     do{
         status = fgets(buffer,sizeof(buffer),fin);
         cont++;
@@ -15,12 +15,11 @@ void feature1(FILE *fin, FILE *fout){
     }
     while (cont<=0);
     printf("\n");   
-<<<<<<< HEAD
 }
 
 void feature2(FILE *fin, FILE *fout) {
     
-    char buffer[70];
+    char buffer[128];
     char *status = NULL;
 
     status = fgets(buffer, sizeof(buffer), fin);
@@ -31,6 +30,21 @@ void feature2(FILE *fin, FILE *fout) {
     }
     printf("\n");
 }
-=======
+
+void feature3(FILE *fin, FILE *fout)
+{
+    int contador = 0;
+    char buffer[10];
+    int resultado = 0, valoractual = 0;
+    char *estado = NULL;
+    estado = fgets(buffer, sizeof(buffer), fin);
+    if (estado != NULL)
+    {
+        for (contador = 0; contador <= sizeof(buffer); contador++)
+        {   fscanf(fin , "%d",&valoractual);
+            resultado = resultado + valoractual; 
+        }
+     }
+    
+    fprintf(fout, "%d", resultado);
 }
->>>>>>> main

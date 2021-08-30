@@ -29,8 +29,11 @@ int main(int argc, char *argv[]){
         if(i ==1 ) feature1(inFile,inFileOut);
         if(i ==2 ) feature2(inFile,inFileOut);
         if(i ==3 ) feature3(inFile,inFileOut);
+<<<<<<< HEAD
         //if(i ==4 ) feature4(inFile, parr, length, op);                
         //if(i == 7) feature7(inFileOut,&pobj);
+=======
+>>>>>>> main
     }
         destroy_array(auxparr);
     destroy_String(auxop);

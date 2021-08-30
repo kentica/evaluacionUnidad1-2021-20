@@ -48,6 +48,7 @@ void feature3(FILE *fin, FILE *fout)
      }
     
     fprintf(fout, "%d", resultado);
+<<<<<<< HEAD
 }
 /*void feature4(FILE *fin, int **parr, int *length, char **op){
     char buffer[250];
@@ -78,3 +79,6 @@ void feature3(FILE *fin, FILE *fout)
     return(EXIT_SUCCESS);
 }
 */
+=======
+}
+>>>>>>> main

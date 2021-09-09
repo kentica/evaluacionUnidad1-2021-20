@@ -1,61 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "student.h"
-
-int *create_array(int);
-char *create_String(int);
-void destroy_array(int *);
-void destroy_String(char *);
+#include <string.h>
 
 int main(int argc, char *argv[]){
 
-    FILE *inFile = fopen("./fin", "r");
-    FILE *inFileOut = fopen("./fout", "a+");
-    char *auxop = create_String(10);
-    char **op = &auxop;
-    int *auxparr = create_array(20);
-    int **parr = &auxparr;
-    int *length;
+    if(argc != 3){
+        printf("number of arguments is not 3\n");
+        return(EXIT_FAILURE);
+    }
 
-    if(inFile == NULL){
-        perror("Open File fin Fails :");
+    FILE *fin = fopen(argv[1],"r");
+    if (fin == NULL){
+        perror("open fin file fails: ");
         return(EXIT_FAILURE);
     }
-    if(inFileOut == NULL){
-        perror("Open File fout fails: ");
+
+    FILE *fout = fopen(argv[2],"w");
+    if (fout == NULL){
+        perror("open fout file fails: ");
         return(EXIT_FAILURE);
     }
-    for(int i=0;i<8;i++){
-        if(i ==1 ) feature1(inFile,inFileOut);
-        if(i ==2 ) feature2(inFile,inFileOut);
-        if(i ==3 ) feature3(inFile,inFileOut);
-<<<<<<< HEAD
-        //if(i ==4 ) feature4(inFile, parr, length, op);                
-        //if(i == 7) feature7(inFileOut,&pobj);
-=======
->>>>>>> main
-    }
-        destroy_array(auxparr);
-    destroy_String(auxop);
+
+    feature1(fin,fout);
+    feature2(fin,fout);
+    feature3(fin,fout);
+
+    int *parr = NULL;
+    int length = 0;
+    char *op = NULL;
+    feature4(fin,&parr,&length,&op);
+    feature5(fout, parr, length, op);
+
+    struct Obj_t obj = {"test",123};
+    feature6(fin, &obj);
+    feature7(fout,&obj);
+
+    struct _courseInfo_t *pobj;
+    int objArrSize = 0;
+    feature8(fin, &pobj, &objArrSize);
+    feature9(fout, pobj,objArrSize);
     
-    fclose(inFile);
-    fclose(inFileOut);
-    
+    // feature10: release memory
+/*
+    free(parr);
+    free(op);
+    free(obj.nombre);
+    free(pobj);
+
+    fclose(fin);
+    fclose(fout);
+*/
+
     return EXIT_SUCCESS;
-}
 
-int *create_array(int size){
-    return (int * ) malloc(size * sizeof(int));
-}
-
-char *create_String(int size) {
-    return (char * ) malloc(size  * sizeof(char));
-}
-
-void destroy_array(int *this){
-    free(this);
-}
-
-void destroy_String(char *this){
-    free(this);
 }

@@ -1,84 +1,37 @@
 #include <stdlib.h>
 #include "student.h"
-#include <string.h>
+
+#define max_long 250
 
 
 void feature1(FILE *fin, FILE *fout){
-    char buffer[128];
-    char *status = NULL;
-    int cont= 0; 
-    do{
-        status = fgets(buffer,sizeof(buffer),fin);
-        cont++;
-        if(status != NULL){
-        fputs(buffer, fout);
-        }               
-    }
-    while (cont<=0);
-    printf("\n");   
-}
 
-void feature2(FILE *fin, FILE *fout) {
-    
-    char buffer[128];
-    char *status = NULL;
+    char* bufer = (char *)calloc(max_long,sizeof(char));// se reservan esa cantidad de espacios para char bufer(memoria dinamica)
+    fgets(bufer,max_long,fin);//que me lea hasta el salto de linea con el fgets
+    fprintf(fout,"%s\n",bufer);
+    free(bufer);//Libero memoria de el bufer
+}
+void feature2(FILE *fin,FILE *fout){
 
-    status = fgets(buffer, sizeof(buffer), fin);
-    if (status != NULL) {
-        for (int i = sizeof(buffer) - 2; i >= 0; i--) {
-            fprintf(fout, "%c", buffer[i]);
-        }
-    }
-    printf("\n");
 }
+void feature3(FILE *fin, FILE *fout){
 
-void feature3(FILE *fin, FILE *fout)
-{
-    int contador = 0;
-    char buffer[10];
-    int resultado = 0, valoractual = 0;
-    char *estado = NULL;
-    estado = fgets(buffer, sizeof(buffer), fin);
-    if (estado != NULL)
-    {
-        for (contador = 0; contador <= sizeof(buffer); contador++)
-        {   fscanf(fin , "%d",&valoractual);
-            resultado = resultado + valoractual; 
-        }
-     }
-    
-    fprintf(fout, "%d", resultado);
-<<<<<<< HEAD
 }
-/*void feature4(FILE *fin, int **parr, int *length, char **op){
-    char buffer[250];
-    char cadtemp = "";
-    int sum = 0;
-    int cant = 0;
-    int avg = 0;
-    char *status =  NULL;
-    int i;
+void feature4(FILE *fin, int **parr, int *length, char **op){
 
-    if (fgets(buffer, 250, buffer) != NULL)
-    {
-            for (i = 0; i >= sizeof(buffer) ; i++)
-            {
-                if (isdigit(buffer[i])){
-                    strcpy(cadtemp, buffer[i]);
-                }
-                else{
-                    sum = sum + atoi(cadtemp);
-                    cant++;
-                    if (buffer[i] == "a"){
-                        avg = sum/cant;
-                        printf("avg is %d", avg);
-                    }
-                }
-            }
-    }
-    return(EXIT_SUCCESS);
 }
-*/
-=======
+void feature5(FILE *fout, int *parr, int length, char *op){
+
 }
->>>>>>> main
+void feature6(FILE *fin, struct Obj_t *pobj){
+
+}
+void feature7(FILE *fout, struct Obj_t *pobj){
+
+}
+void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){
+
+}
+void feature9(FILE *fout, struct _courseInfo_t *pobj,int length){
+
+}

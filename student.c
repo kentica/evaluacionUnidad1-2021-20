@@ -77,8 +77,8 @@ void feature5(FILE *fout, int *parr, int length, char *op){//Condiciones para ca
         for(short i = 0;i < length -1;i++){
             sum = sum + parr[i];
         }
-        printf("%d\n",sum);
-        printf("%d\n",length);
+        //printf("%d\n",sum);
+        //printf("%d\n",length);
         fprintf(fout,"%d\n",(sum/(length-1)));        
     }
     else if(strcmp(op,"max")==0){
@@ -106,9 +106,22 @@ void feature5(FILE *fout, int *parr, int length, char *op){//Condiciones para ca
     free(op);
 }
 void feature6(FILE *fin, struct Obj_t *pobj){
+        char* bufer = (char *)calloc(max_long,sizeof(char));
+        char* nombre = (char *)calloc(max_long,sizeof(char));
+        int id = 0;
+        pobj->nombre = (char *)calloc(max_long,sizeof(char));
+        char* bash;
+        fgets(bufer,max_long,fin);
+        nombre = strtok(bufer,",");
+        id = strtol(strtok(NULL,","),&bash,10);//el 10 es la base a la que se convierte
+        strcpy(pobj -> nombre,nombre);
+        pobj->cedula = id;//soy rebelde y le pongo id a mi cedula no lo cambio en el .h por que se que tiene automatizada la revision.
+        free(bufer);
 
 }
 void feature7(FILE *fout, struct Obj_t *pobj){
+
+    fprintf(fout,"%d,%s\n",pobj->cedula,pobj->nombre);
 
 }
 void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){

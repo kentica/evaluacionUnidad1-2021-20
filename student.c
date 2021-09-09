@@ -9,7 +9,7 @@ void feature1(FILE *fin, FILE *fout){
 
     char* bufer = (char *)calloc(max_long,sizeof(char));// se reservan esa cantidad de espacios para char bufer(memoria dinamica)
     fgets(bufer,max_long,fin);//que me lea hasta el salto de linea con el fgets
-    fprintf(fout,"%s\n",bufer);
+    fprintf(fout,"%s",bufer);
     free(bufer);//Libero memoria de el bufer
 }
 void feature2(FILE *fin, FILE *fout){
@@ -23,12 +23,30 @@ void feature2(FILE *fin, FILE *fout){
         bufer2[i] = bufer2[lon - i - 1];
         bufer2[lon-i - 1 ] = *temp;
     }
-    fprintf(fout,"%s",bufer2);
+    fprintf(fout,"%s\n",bufer2);
     free(bufer2);
     free(temp);
 }
 void feature3(FILE *fin, FILE *fout){
-
+    char* bufer = (char *)calloc(max_long,sizeof(char));
+    short* numeros = (short *) calloc(max_long,sizeof(short));
+    char* temp = (char *)calloc(4,sizeof(char));
+    char *bash;
+    fgets(bufer,max_long,fin);
+    short i=0;
+    int sum = 0;
+    temp = strtok(bufer, " ");
+    while(temp != NULL){
+        numeros[i] = strtol(temp,&bash,10);
+        sum = sum + numeros[i];
+        temp = strtok(NULL, " ");
+        i++;        
+    }
+    fprintf(fout,"%d\n",sum);
+    free(bufer);    
+    free(temp);
+    free(numeros);
+    //El bash no se libera. ya que se este no tiene memoria reservada
 }
 void feature4(FILE *fin, int **parr, int *length, char **op){
 

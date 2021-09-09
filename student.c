@@ -100,7 +100,7 @@ void feature5(FILE *fout, int *parr, int length, char *op){//Condiciones para ca
         fprintf(fout,"%d\n",min);        
     }
     else{
-        fprintf(fout,"Operacion No reconocida.");
+        fprintf(fout,"Operacion No reconocida.");//caso base
     }
     free(parr);
     free(op);
@@ -125,8 +125,59 @@ void feature7(FILE *fout, struct Obj_t *pobj){
 
 }
 void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){
-
+    char* bufer = (char *)calloc(max_long,sizeof(char));
+    int N=0, j=0;
+    char *bash;
+    char *bash2;
+    fgets(bufer,max_long,fin);
+    N = strtol(bufer,&bash,10);
+    struct _courseInfo_t *parr = (struct _courseInfo_t *)calloc(N,sizeof(struct _courseInfo_t));
+    printf("Porfavor,ingresar la Informacion de el orden Curso,Creditos,Nota\n");
+    for(short i=0; i<N; i++){
+        j=0;
+        printf("Cuso %d: ",i+1);
+        fgets(bufer,max_long,stdin);
+        bash = strtok(bufer,",");
+        while(bash!=NULL){
+            if(j==0){
+                strcpy(parr[i].name,bash);
+            }else if(j==1){
+                parr[i].credits = strtol(bash,&bash2,10);
+            }
+            else if(j==2){
+                parr[i].grade= strtof(bash,&bash2);
+            }
+            j++;
+            bash = strtok(NULL,",");
+        }
+    }
+    *pobj = parr;
+    *length = N;
+    free(bufer);
+    fclose(fin);//ya se deja de leer la info de el fin asi que se puede cerrar
 }
 void feature9(FILE *fout, struct _courseInfo_t *pobj,int length){
-
+    char* bufer = (char*)calloc(10,sizeof(char));
+    float calificacion = 0, creditos = 0;
+    float promedio = 0.0f;
+    for(short i=0;i<length;i++){
+        calificacion = calificacion + pobj[i].grade*pobj[i].credits;
+        creditos = creditos + pobj[i].credits;        
+    }
+    promedio = calificacion/creditos;
+    printf("Desea guardar la info? (s) o (n) \n");
+    fgets(bufer,10,stdin);
+    char *tk = strtok(bufer,"\n");
+    if(strcmp(tk,"s")==0 || strcmp(tk,"S")==0){
+        for(short i=0;i<length;i++){
+            fprintf(fout,"%s,%d,%f\n",pobj[i].name,pobj[i].credits,pobj[i].grade);            
+        }
+        fprintf(fout,"promedio acumulado: %f",promedio);        
+    }
+    else{
+        fprintf(fout,"Promedio acumulado: %f",promedio);
+    }
+    free(bufer);
+    free(pobj);
+    fclose(fout);
 }

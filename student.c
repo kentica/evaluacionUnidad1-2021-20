@@ -49,10 +49,61 @@ void feature3(FILE *fin, FILE *fout){
     //El bash no se libera. ya que se este no tiene memoria reservada
 }
 void feature4(FILE *fin, int **parr, int *length, char **op){
+    char* bufer = (char *)calloc(max_long,sizeof(char));
+    char* temp = (char *)calloc(4,sizeof(char));
+    *parr = (int *)calloc(max_long,sizeof(int));
+    char *bash = (char *)calloc(4,sizeof(char));
+    *op = (char *)calloc(4,sizeof(char));
+    *length = 0;
+    int i=0;
+    fgets(bufer,max_long,fin);
+    temp = strtok(bufer, " ");
+    while(temp != NULL){
+        (*parr)[i] = strtol(temp,&bash,10);
+        temp = strtok(NULL, " ");
+        i++;        
+    }
+    strncpy(*op,bash,3);
+    *length = i;
+    free(bufer);
+    free(temp);
+    //El par aunque usa calloc no se limpia puesto que se se usa en el feature 5
+    //por que la direccion de memoria se encuentra en el main.
 
 }
-void feature5(FILE *fout, int *parr, int length, char *op){
-
+void feature5(FILE *fout, int *parr, int length, char *op){//Condiciones para cada caso posible.
+    if(strcmp(op,"avg")==0){
+        int sum = 0;
+        for(short i = 0;i < length -1;i++){
+            sum = sum + parr[i];
+        }
+        printf("%d\n",sum);
+        printf("%d\n",length);
+        fprintf(fout,"%d\n",(sum/(length-1)));        
+    }
+    else if(strcmp(op,"max")==0){
+        int max = -1000;
+        for(short i=0; i< length - 1;i++){
+            if(parr[i] > max){
+                max = parr[i];
+            }
+        }
+        fprintf(fout,"%d\n",max);        
+    }
+    else if(strcmp(op,"min")==0){
+        int min = 1000;
+        for(short i=0; i< length - 1;i++){
+            if(parr[i] < min){
+                min = parr[i];
+            }
+        }
+        fprintf(fout,"%d\n",min);        
+    }
+    else{
+        fprintf(fout,"Operacion No reconocida.");
+    }
+    free(parr);
+    free(op);
 }
 void feature6(FILE *fin, struct Obj_t *pobj){
 
